@@ -57,8 +57,8 @@ public class DetailNeighbourActivity extends AppCompatActivity {
         aboutMeView.setText(neighbour.getAboutMe());
     }
 
-    public static void navigate(FragmentActivity activity, Neighbour neighbourClick) {
-        neighbour = neighbourClick;
+    public static void navigate(FragmentActivity activity, Neighbour clickedNeighbour) {
+        neighbour = clickedNeighbour;
         Intent intent = new Intent(activity, DetailNeighbourActivity.class);
         ActivityCompat.startActivity(activity, intent, null);
     }
