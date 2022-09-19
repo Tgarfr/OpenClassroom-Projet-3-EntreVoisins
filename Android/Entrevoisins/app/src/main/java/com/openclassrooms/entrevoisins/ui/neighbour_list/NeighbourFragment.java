@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
+import com.openclassrooms.entrevoisins.events.ClickOnNeighbourEvent;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
@@ -27,19 +28,21 @@ public class NeighbourFragment extends Fragment {
     private NeighbourApiService mApiService;
     private List<Neighbour> mNeighbours;
     private RecyclerView mRecyclerView;
+    public ClickOnNeighbourEvent clickOnNeighbourEvent;
 
 
     /**
      * Create and return a new instance
      * @return @{@link NeighbourFragment}
      */
-    public static NeighbourFragment newInstance(NeighbourApiService neighbourApiService) {
-        NeighbourFragment fragment = new NeighbourFragment(neighbourApiService);
+    public static NeighbourFragment newInstance(NeighbourApiService neighbourApiService, ClickOnNeighbourEvent clickOnNeighbourEvent) {
+        NeighbourFragment fragment = new NeighbourFragment(neighbourApiService, clickOnNeighbourEvent);
         return fragment;
     }
 
-    public NeighbourFragment(NeighbourApiService neighbourApiService) {
+    public NeighbourFragment(NeighbourApiService neighbourApiService, ClickOnNeighbourEvent activityClickOnNeighbourEvent) {
         mApiService = neighbourApiService;
+        clickOnNeighbourEvent = activityClickOnNeighbourEvent;
     }
 
     @Override
@@ -63,7 +66,7 @@ public class NeighbourFragment extends Fragment {
      */
     private void initList() {
         mNeighbours = mApiService.getNeighbours();
-        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours));
+        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours, clickOnNeighbourEvent));
     }
 
     @Override

@@ -5,13 +5,17 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.openclassrooms.entrevoisins.di.DI;
+import com.openclassrooms.entrevoisins.events.ClickOnNeighbourEvent;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
 
 public class ListNeighbourPagerAdapter extends FragmentPagerAdapter {
 
-    public ListNeighbourPagerAdapter(FragmentManager fm) {
+    public ClickOnNeighbourEvent clickOnNeighbourEvent;
+
+    public ListNeighbourPagerAdapter(FragmentManager fm, ClickOnNeighbourEvent activityClickOnNeighbourEvent) {
         super(fm);
+        clickOnNeighbourEvent = activityClickOnNeighbourEvent;
     }
 
     /**
@@ -27,7 +31,7 @@ public class ListNeighbourPagerAdapter extends FragmentPagerAdapter {
         } else {
             neighbourApiService = DI.getNeighbourApiService();
         }
-        return NeighbourFragment.newInstance(neighbourApiService);
+        return NeighbourFragment.newInstance(neighbourApiService, clickOnNeighbourEvent);
     }
 
     /**

@@ -39,7 +39,7 @@ public class ListNeighbourActivity extends AppCompatActivity implements ClickOnN
         ButterKnife.bind(this);
 
         setSupportActionBar(mToolbar);
-        mPagerAdapter = new ListNeighbourPagerAdapter(getSupportFragmentManager());
+        mPagerAdapter = new ListNeighbourPagerAdapter(getSupportFragmentManager(), this::clickOnNeighbour);
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
         mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
@@ -52,8 +52,8 @@ public class ListNeighbourActivity extends AppCompatActivity implements ClickOnN
         AddNeighbourActivity.navigate(this);
     }
 
-    public void clickOnNeighbour(Neighbour neighbourCliqued) {
-        DetailNeighbourActivity.navigate(activityContext,neighbourCliqued);
+    public void clickOnNeighbour(Neighbour cliquedNeighbour) {
+        DetailNeighbourActivity.navigate(activityContext, cliquedNeighbour);
     }
 
     @Override
@@ -61,3 +61,4 @@ public class ListNeighbourActivity extends AppCompatActivity implements ClickOnN
         neighbourFavoritesList.createNeighbour(neighbourAdd);
     }
 }
+

@@ -25,12 +25,13 @@ import butterknife.ButterKnife;
 public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeighbourRecyclerViewAdapter.ViewHolder> {
 
     private final List<Neighbour> mNeighbours;
+    public ClickOnNeighbourEvent clickOnNeighbourEvent;
 
-    public MyNeighbourRecyclerViewAdapter(List<Neighbour> items) {
+
+    public MyNeighbourRecyclerViewAdapter(List<Neighbour> items,ClickOnNeighbourEvent activityClickOnNeighbourEvent) {
         mNeighbours = items;
+        clickOnNeighbourEvent = activityClickOnNeighbourEvent;
     }
-
-    ClickOnNeighbourEvent clickOnNeighbourEvent = new ListNeighbourActivity();
 
 
     @Override
