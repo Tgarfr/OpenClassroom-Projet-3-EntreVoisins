@@ -1,9 +1,9 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -57,10 +57,10 @@ public class DetailNeighbourActivity extends AppCompatActivity {
         aboutMeView.setText(neighbour.getAboutMe());
     }
 
-    public static void navigate(FragmentActivity activity, Neighbour clickedNeighbour) {
+    public static void navigate(Activity activityContext, Neighbour clickedNeighbour) {
         neighbour = clickedNeighbour;
-        Intent intent = new Intent(activity, DetailNeighbourActivity.class);
-        ActivityCompat.startActivity(activity, intent, null);
+        Intent intent = new Intent(activityContext, DetailNeighbourActivity.class);
+        ActivityCompat.startActivity(activityContext, intent, null);
     }
 
     @OnClick(R.id.backButtonDetail)

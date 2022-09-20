@@ -4,18 +4,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.openclassrooms.entrevoisins.di.DI;
-import com.openclassrooms.entrevoisins.events.ClickOnNeighbourEvent;
-import com.openclassrooms.entrevoisins.service.NeighbourApiService;
+import com.openclassrooms.entrevoisins.service.FavoriteNeighbourList;
 
 
 public class ListNeighbourPagerAdapter extends FragmentPagerAdapter {
 
-    public ClickOnNeighbourEvent clickOnNeighbourEvent;
+    public FavoriteNeighbourList mNeighbourFavoritesList;
 
-    public ListNeighbourPagerAdapter(FragmentManager fm, ClickOnNeighbourEvent activityClickOnNeighbourEvent) {
+    public ListNeighbourPagerAdapter(FragmentManager fm, FavoriteNeighbourList neighbourFavoritesList) {
         super(fm);
-        clickOnNeighbourEvent = activityClickOnNeighbourEvent;
+        mNeighbourFavoritesList = neighbourFavoritesList;;
     }
 
     /**
@@ -25,13 +23,12 @@ public class ListNeighbourPagerAdapter extends FragmentPagerAdapter {
      */
     @Override
     public Fragment getItem(int position) {
-        NeighbourApiService neighbourApiService = null;
-        if(position == 1) {
-            neighbourApiService = ListNeighbourActivity.neighbourFavoritesList;
-        } else {
-            neighbourApiService = DI.getNeighbourApiService();
+        if (position == 1) {
+            return FavoritesNeighbourFragment.newInstance(mNeighbourFavoritesList);
         }
-        return NeighbourFragment.newInstance(neighbourApiService, clickOnNeighbourEvent);
+        else {
+            return NeighbourFragment.newInstance();
+        }
     }
 
     /**
