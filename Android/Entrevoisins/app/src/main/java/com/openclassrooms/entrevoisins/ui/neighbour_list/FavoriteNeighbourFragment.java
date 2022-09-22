@@ -13,36 +13,34 @@ import android.view.ViewGroup;
 
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
-import com.openclassrooms.entrevoisins.events.ClickOnNeighbourEvent;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
-import com.openclassrooms.entrevoisins.service.FavoriteNeighbourList;
+import com.openclassrooms.entrevoisins.service.FavoriteNeighbourIdList;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
-public class FavoritesNeighbourFragment extends Fragment {
+public class FavoriteNeighbourFragment extends Fragment {
 
     private NeighbourApiService mApiService;
     private List<Neighbour> mNeighbours;
     private RecyclerView mRecyclerView;
-    public static FavoriteNeighbourList mNeighbourFavoritesList;
+    public static FavoriteNeighbourIdList mNeighbourFavoritesList;
 
     /**
      * Create and return a new instance
-     * @return @{@link FavoritesNeighbourFragment}
+     * @return @{@link FavoriteNeighbourFragment}
      */
-    public static FavoritesNeighbourFragment newInstance(FavoriteNeighbourList neighbourFavoritesList) {
-        FavoritesNeighbourFragment fragment = new FavoritesNeighbourFragment(neighbourFavoritesList);
+    public static FavoriteNeighbourFragment newInstance(FavoriteNeighbourIdList neighbourFavoritesList) {
+        FavoriteNeighbourFragment fragment = new FavoriteNeighbourFragment(neighbourFavoritesList);
         return fragment;
     }
 
-    public FavoritesNeighbourFragment(FavoriteNeighbourList neighbourFavoritesList) {
+    public FavoriteNeighbourFragment(FavoriteNeighbourIdList neighbourFavoritesList) {
         mNeighbourFavoritesList = neighbourFavoritesList;
     }
 
@@ -55,7 +53,7 @@ public class FavoritesNeighbourFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_neighbour_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_favorite_neighbour_list, container, false);
         Context context = view.getContext();
         mRecyclerView = (RecyclerView) view;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -67,7 +65,7 @@ public class FavoritesNeighbourFragment extends Fragment {
      * Init the List of neighbours
      */
     private void initList() {
-        List<Neighbour> displayList = getNeighboursListFromListFavoriteId(mNeighbourFavoritesList,mApiService.getNeighbours());
+        List<Neighbour> displayList = mNeighbourFavoritesList.getFavoriteNeighboursListFromNeighboursApi(mApiService);
         mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(displayList));
     }
 
@@ -105,21 +103,4 @@ public class FavoritesNeighbourFragment extends Fragment {
     public void clickOnNeighbour(ClickOnNeighbourEvent event) {
         DetailNeighbourActivity.navigate(getActivity(), event.neighbour);
     }*/
-
-    private List<Neighbour> getNeighboursListFromListFavoriteId(FavoriteNeighbourList listeFavoriteId, List<Neighbour> listeNeighbour) {
-        List<Neighbour> neighboursList = new ArrayList<Neighbour>();
-        int listeFavoriteIdSize = listeFavoriteId.countNeighbour();
-        int listeNeighbourSize = listeNeighbour.size();
-        for (int i = 0; i < listeFavoriteIdSize; i++) {
-            for (int j = 0; j < listeNeighbourSize; j++) {
-                if (listeNeighbour.get(j).getId() == listeFavoriteId.getlist().get(i)) {
-                    neighboursList.add(listeNeighbour.get(j));
-                }
-            }
-        }
-        return neighboursList;
-    }
-
-
-
 }

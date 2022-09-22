@@ -4,14 +4,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.openclassrooms.entrevoisins.service.FavoriteNeighbourList;
+import com.openclassrooms.entrevoisins.service.FavoriteNeighbourIdList;
 
 
 public class ListNeighbourPagerAdapter extends FragmentPagerAdapter {
 
-    public FavoriteNeighbourList mNeighbourFavoritesList;
+    public FavoriteNeighbourIdList mNeighbourFavoritesList;
 
-    public ListNeighbourPagerAdapter(FragmentManager fm, FavoriteNeighbourList neighbourFavoritesList) {
+    public ListNeighbourPagerAdapter(FragmentManager fm, FavoriteNeighbourIdList neighbourFavoritesList) {
         super(fm);
         mNeighbourFavoritesList = neighbourFavoritesList;;
     }
@@ -24,7 +24,7 @@ public class ListNeighbourPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if (position == 1) {
-            return FavoritesNeighbourFragment.newInstance(mNeighbourFavoritesList);
+            return FavoriteNeighbourFragment.newInstance(mNeighbourFavoritesList);
         }
         else {
             return NeighbourFragment.newInstance();

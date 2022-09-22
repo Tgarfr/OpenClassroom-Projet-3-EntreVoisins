@@ -9,7 +9,7 @@ import android.support.v7.widget.Toolbar;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.events.AddFavoriteNeighbour;
 import com.openclassrooms.entrevoisins.model.Neighbour;
-import com.openclassrooms.entrevoisins.service.FavoriteNeighbourList;
+import com.openclassrooms.entrevoisins.service.FavoriteNeighbourIdList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,7 +26,7 @@ public class ListNeighbourActivity extends AppCompatActivity implements AddFavor
     ViewPager mViewPager;
 
     ListNeighbourPagerAdapter mPagerAdapter;
-    public static FavoriteNeighbourList neighbourFavoritesList = new FavoriteNeighbourList();
+    public static FavoriteNeighbourIdList neighbourFavoritesList = new FavoriteNeighbourIdList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class ListNeighbourActivity extends AppCompatActivity implements AddFavor
 
     @Override
     public void clickAddFavorite(Neighbour neighbourAdd) {
-        neighbourFavoritesList.addNeighbour(neighbourAdd.getId());
+        neighbourFavoritesList.addIdNeighbour(neighbourAdd.getId());
     }
 }
 
