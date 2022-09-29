@@ -19,7 +19,7 @@ import android.support.test.runner.AndroidJUnit4;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.model.Neighbour;
-import com.openclassrooms.entrevoisins.service.FavoriteNeighbourIdList;
+import com.openclassrooms.entrevoisins.repository.FavoriteNeighbourIdRepository;
 import com.openclassrooms.entrevoisins.ui.neighbour_list.ListNeighbourActivity;
 import com.openclassrooms.entrevoisins.utils.RecyclerViewItemAssertion;
 import com.openclassrooms.entrevoisins.utils.TabLayoutSelectAction;
@@ -40,7 +40,7 @@ public class NeighboursFavoriteListTest {
 
 
     private ListNeighbourActivity mActivity;
-    private FavoriteNeighbourIdList favoriteNeighours;
+    private FavoriteNeighbourIdRepository favoriteNeighours;
     private List<Neighbour> neighboursList;
 
 
@@ -53,7 +53,7 @@ public class NeighboursFavoriteListTest {
         mActivity = mActivityRule.getActivity();
         assertThat(mActivity, notNullValue());
 
-        favoriteNeighours = (FavoriteNeighbourIdList) mActivity.neighbourFavoritesList;
+        favoriteNeighours = FavoriteNeighbourIdRepository.getInstance();
         neighboursList = DI.getNewInstanceApiService().getNeighbours();
 
         // If not favorites neighbour, create 3 favorite neighbour

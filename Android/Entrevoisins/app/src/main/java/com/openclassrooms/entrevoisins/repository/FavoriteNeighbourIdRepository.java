@@ -1,17 +1,25 @@
-package com.openclassrooms.entrevoisins.service;
+package com.openclassrooms.entrevoisins.repository;
 
 import com.openclassrooms.entrevoisins.model.Neighbour;
+import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FavoriteNeighbourIdList {
+public class FavoriteNeighbourIdRepository {
 
     List<Long> neighbourFavoriteList;
 
-    public FavoriteNeighbourIdList() {
+    private FavoriteNeighbourIdRepository() {
         neighbourFavoriteList = new ArrayList<Long>();
     }
+
+    private static FavoriteNeighbourIdRepository INSTANCE = new FavoriteNeighbourIdRepository();
+
+    public static FavoriteNeighbourIdRepository getInstance() {
+        return INSTANCE;
+    }
+
 
     public List<Long> getlist() {
         return neighbourFavoriteList;

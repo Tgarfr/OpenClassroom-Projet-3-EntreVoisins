@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.model.Neighbour;
+import com.openclassrooms.entrevoisins.repository.FavoriteNeighbourIdRepository;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +16,7 @@ import java.util.List;
 @RunWith(JUnit4.class)
 public class FavoriteNeighbourIdListTest {
 
-    private FavoriteNeighbourIdList favoriteNeighbourIdList;
+    private FavoriteNeighbourIdRepository favoriteNeighbourIdList;
     private NeighbourApiService neighbourApiService;
     private List<Neighbour> neighbourList;
 
@@ -23,7 +24,7 @@ public class FavoriteNeighbourIdListTest {
     public void setup() {
         neighbourApiService = DI.getNewInstanceApiService();
         neighbourList = neighbourApiService.getNeighbours();
-        favoriteNeighbourIdList = new FavoriteNeighbourIdList();
+        favoriteNeighbourIdList = FavoriteNeighbourIdRepository.getInstance();
 
         if (favoriteNeighbourIdList.countNeighbour() == 0) {
             final int addedFavoriteNeighbours = 3;

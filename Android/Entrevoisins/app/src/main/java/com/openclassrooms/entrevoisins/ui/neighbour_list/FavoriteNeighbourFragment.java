@@ -14,12 +14,11 @@ import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.events.ClickOnNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
-import com.openclassrooms.entrevoisins.service.FavoriteNeighbourIdList;
+import com.openclassrooms.entrevoisins.repository.FavoriteNeighbourIdRepository;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -29,25 +28,22 @@ public class FavoriteNeighbourFragment extends Fragment {
     private NeighbourApiService mApiService;
     private List<Neighbour> mNeighbours;
     private RecyclerView mRecyclerView;
-    public static FavoriteNeighbourIdList mNeighbourFavoritesList;
+    FavoriteNeighbourIdRepository favoriteNeighbourIdRepository;
 
     /**
      * Create and return a new instance
      * @return @{@link FavoriteNeighbourFragment}
      */
-    public static FavoriteNeighbourFragment newInstance(FavoriteNeighbourIdList neighbourFavoritesList) {
-        FavoriteNeighbourFragment fragment = new FavoriteNeighbourFragment(neighbourFavoritesList);
+    public static FavoriteNeighbourFragment newInstance() {
+        FavoriteNeighbourFragment fragment = new FavoriteNeighbourFragment();
         return fragment;
-    }
-
-    public FavoriteNeighbourFragment(FavoriteNeighbourIdList neighbourFavoritesList) {
-        mNeighbourFavoritesList = neighbourFavoritesList;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mApiService = DI.getNeighbourApiService();
+        favoriteNeighbourIdRepository = FavoriteNeighbourIdRepository.getInstance();
     }
 
     @Override
@@ -65,7 +61,7 @@ public class FavoriteNeighbourFragment extends Fragment {
      * Init the List of neighbours
      */
     private void initList() {
-        List<Neighbour> displayList = mNeighbourFavoritesList.getFavoriteNeighboursListFromNeighboursApi(mApiService);
+        List<Neighbour> displayList = favoriteNeighbourIdRepository.getFavoriteNeighboursListFromNeighboursApi(mApiService);
         mRecyclerView.setAdapter(new MyFavoriteNeighbourRecyclerViewAdapter(displayList));
     }
 

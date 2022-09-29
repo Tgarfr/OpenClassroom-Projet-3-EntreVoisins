@@ -7,15 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.openclassrooms.entrevoisins.R;
-import com.openclassrooms.entrevoisins.events.AddFavoriteNeighbour;
-import com.openclassrooms.entrevoisins.model.Neighbour;
-import com.openclassrooms.entrevoisins.service.FavoriteNeighbourIdList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ListNeighbourActivity extends AppCompatActivity implements AddFavoriteNeighbour {
+public class ListNeighbourActivity extends AppCompatActivity {
 
     // UI Components
     @BindView(R.id.tabs)
@@ -26,7 +23,6 @@ public class ListNeighbourActivity extends AppCompatActivity implements AddFavor
     ViewPager mViewPager;
 
     ListNeighbourPagerAdapter mPagerAdapter;
-    public static FavoriteNeighbourIdList neighbourFavoritesList = new FavoriteNeighbourIdList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +32,7 @@ public class ListNeighbourActivity extends AppCompatActivity implements AddFavor
 
         setSupportActionBar(mToolbar);
 
-        mPagerAdapter = new ListNeighbourPagerAdapter(getSupportFragmentManager(), neighbourFavoritesList);
+        mPagerAdapter = new ListNeighbourPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
         mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
@@ -45,11 +41,6 @@ public class ListNeighbourActivity extends AppCompatActivity implements AddFavor
     @OnClick(R.id.add_neighbour)
     void addNeighbour() {
         AddNeighbourActivity.navigate(this);
-    }
-
-    @Override
-    public void clickAddFavorite(Neighbour neighbourAdd) {
-        neighbourFavoritesList.addIdNeighbour(neighbourAdd.getId());
     }
 }
 

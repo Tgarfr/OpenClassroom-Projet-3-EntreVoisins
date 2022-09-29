@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.openclassrooms.entrevoisins.R;
-import com.openclassrooms.entrevoisins.events.AddFavoriteNeighbour;
 import com.openclassrooms.entrevoisins.model.Neighbour;
+import com.openclassrooms.entrevoisins.repository.FavoriteNeighbourIdRepository;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,7 +21,7 @@ public class DetailNeighbourActivity extends AppCompatActivity {
 
 
     public static Neighbour neighbour;
-    AddFavoriteNeighbour addFavoriteNeighbour = new ListNeighbourActivity();
+    FavoriteNeighbourIdRepository favoriteNeighbourIdRepository;
 
     @BindView(R.id.avatarDetail)
     ImageView avatarView;
@@ -44,6 +44,7 @@ public class DetailNeighbourActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_neighbour);
         ButterKnife.bind(this);
+        favoriteNeighbourIdRepository = FavoriteNeighbourIdRepository.getInstance();
 
         Glide.with(this)
                 .load(neighbour.getAvatarUrl())
@@ -70,7 +71,7 @@ public class DetailNeighbourActivity extends AppCompatActivity {
 
     @OnClick(R.id.add_favorite_neighbour)
     void addFavoriteNeighbour() {
-        addFavoriteNeighbour.clickAddFavorite(neighbour);
+        favoriteNeighbourIdRepository.addIdNeighbour(neighbour.getId());
     }
 
 }
