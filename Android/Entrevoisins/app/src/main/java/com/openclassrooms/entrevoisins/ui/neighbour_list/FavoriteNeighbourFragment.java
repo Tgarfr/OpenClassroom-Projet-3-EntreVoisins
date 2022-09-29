@@ -6,20 +6,20 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
-import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
+import com.openclassrooms.entrevoisins.events.ClickOnNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.FavoriteNeighbourIdList;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -66,7 +66,7 @@ public class FavoriteNeighbourFragment extends Fragment {
      */
     private void initList() {
         List<Neighbour> displayList = mNeighbourFavoritesList.getFavoriteNeighboursListFromNeighboursApi(mApiService);
-        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(displayList));
+        mRecyclerView.setAdapter(new MyFavoriteNeighbourRecyclerViewAdapter(displayList));
     }
 
     @Override
@@ -87,20 +87,9 @@ public class FavoriteNeighbourFragment extends Fragment {
         EventBus.getDefault().unregister(this);
     }
 
-    /**
-     * Fired if the user clicks on a delete button
-     * @param event
-     */
-    @Subscribe
-    public void onDeleteNeighbour(DeleteNeighbourEvent event) {
-        Log.i("TAG","debugage");
-        mApiService.deleteNeighbour(event.neighbour);
-        initList();
-    }
-
-    /*
     @Subscribe
     public void clickOnNeighbour(ClickOnNeighbourEvent event) {
         DetailNeighbourActivity.navigate(getActivity(), event.neighbour);
-    }*/
+        EventBus.getDefault().cancelEventDelivery(event);
+    }
 }

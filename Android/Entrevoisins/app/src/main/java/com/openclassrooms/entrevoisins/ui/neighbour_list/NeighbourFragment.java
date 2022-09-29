@@ -94,5 +94,6 @@ public class NeighbourFragment extends Fragment {
     @Subscribe
     public void clickOnNeighbour(ClickOnNeighbourEvent event) {
         DetailNeighbourActivity.navigate(getActivity(), event.neighbour);
+        EventBus.getDefault().cancelEventDelivery(event);
     }
 }
