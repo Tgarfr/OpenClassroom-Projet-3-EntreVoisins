@@ -79,8 +79,8 @@ public class NeighboursFavoriteListTest {
     public void myNeighboursFavoriteListTest_checkList() {
         ViewInteraction view = onView(withId(R.id.list_favorite_neighbours));
         for (int i = 0; i < favoriteNeighours.countNeighbour(); i++) {
-            Long favoriteNeighbourId = favoriteNeighours.getlist().get(i);
-            Neighbour favoriteNeighbour = favoriteNeighours.getFavoriteNeighboursFromList(favoriteNeighbourId, neighboursList);
+            Long favoriteNeighbourId = favoriteNeighours.getIdList().get(i);
+            Neighbour favoriteNeighbour = favoriteNeighours.getNeighboursFromList(favoriteNeighbourId, neighboursList);
             view.check(new RecyclerViewItemAssertion(i, R.id.item_list_name, withText(favoriteNeighbour.getName())));
         }
 
