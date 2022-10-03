@@ -7,6 +7,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.openclassrooms.entrevoisins.R;
@@ -72,6 +73,6 @@ public class DetailNeighbourActivity extends AppCompatActivity {
     @OnClick(R.id.add_favorite_neighbour)
     void addFavoriteNeighbour() {
         favoriteNeighbourIdRepository.addIdNeighbour(neighbour.getId());
+        Toast.makeText(getApplicationContext(), "Ajout en favori", Toast.LENGTH_SHORT).show();
     }
-
 }

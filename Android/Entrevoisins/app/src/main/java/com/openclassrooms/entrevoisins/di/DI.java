@@ -1,6 +1,5 @@
 package com.openclassrooms.entrevoisins.di;
 
-import com.openclassrooms.entrevoisins.repository.FavoriteNeighbourIdRepository;
 import com.openclassrooms.entrevoisins.service.DummyNeighbourApiService;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
@@ -16,7 +15,6 @@ public class DI {
      * @return
      */
     public static NeighbourApiService getNeighbourApiService() {
-        FavoriteNeighbourIdRepository.getInstance().setNeighbourApiService(service);
         return service;
     }
 

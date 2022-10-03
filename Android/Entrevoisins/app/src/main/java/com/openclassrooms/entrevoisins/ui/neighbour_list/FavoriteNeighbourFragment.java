@@ -20,6 +20,7 @@ import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -61,7 +62,7 @@ public class FavoriteNeighbourFragment extends Fragment {
      * Init the List of neighbours
      */
     private void initList() {
-        List<Neighbour> displayList = favoriteNeighbourIdRepository.getNeighboursList();
+        List<Neighbour> displayList = this.getFavoriteNeighboursList();
         mRecyclerView.setAdapter(new MyFavoriteNeighbourRecyclerViewAdapter(displayList));
     }
 
@@ -81,6 +82,25 @@ public class FavoriteNeighbourFragment extends Fragment {
     public void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
+    }
+
+    private List<Neighbour> getFavoriteNeighboursList() {
+        List<Neighbour> neighboursObjetList = new ArrayList<Neighbour>();
+        for (int i = 0; i < favoriteNeighbourIdRepository.countNeighbour(); i++) {
+            Neighbour addNeighbour = this.getNeighboursFromApiService(favoriteNeighbourIdRepository.getIdList().get(i));
+            neighboursObjetList.add(addNeighbour);
+        }
+        return neighboursObjetList;
+    }
+
+    private Neighbour getNeighboursFromApiService(Long neighbourId) {
+        int listeNeighbourSize = mApiService.getNeighbours().size();
+        for (int i = 0; i < listeNeighbourSize; i++) {
+            if (mApiService.getNeighbours().get(i).getId() == neighbourId) {
+                return mApiService.getNeighbours().get(i);
+            }
+        }
+        return null;
     }
 
     @Subscribe
