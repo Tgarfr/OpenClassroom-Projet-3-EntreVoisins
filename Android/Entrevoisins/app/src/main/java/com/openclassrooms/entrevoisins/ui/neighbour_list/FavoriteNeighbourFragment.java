@@ -87,20 +87,10 @@ public class FavoriteNeighbourFragment extends Fragment {
     private List<Neighbour> getFavoriteNeighboursList() {
         List<Neighbour> neighboursObjetList = new ArrayList<Neighbour>();
         for (int i = 0; i < favoriteNeighbourIdRepository.countNeighbour(); i++) {
-            Neighbour addNeighbour = this.getNeighboursFromApiService(favoriteNeighbourIdRepository.getIdList().get(i));
+            Neighbour addNeighbour = mApiService.getNeighbourWithId(favoriteNeighbourIdRepository.getIdList().get(i));
             neighboursObjetList.add(addNeighbour);
         }
         return neighboursObjetList;
-    }
-
-    private Neighbour getNeighboursFromApiService(Long neighbourId) {
-        int listeNeighbourSize = mApiService.getNeighbours().size();
-        for (int i = 0; i < listeNeighbourSize; i++) {
-            if (mApiService.getNeighbours().get(i).getId() == neighbourId) {
-                return mApiService.getNeighbours().get(i);
-            }
-        }
-        return null;
     }
 
     @Subscribe

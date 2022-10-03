@@ -20,6 +20,7 @@ import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.repository.FavoriteNeighbourIdRepository;
+import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 import com.openclassrooms.entrevoisins.ui.neighbour_list.ListNeighbourActivity;
 import com.openclassrooms.entrevoisins.utils.RecyclerViewItemAssertion;
 import com.openclassrooms.entrevoisins.utils.TabLayoutSelectAction;
@@ -38,11 +39,10 @@ import java.util.List;
 @RunWith(AndroidJUnit4.class)
 public class NeighboursFavoriteListTest {
 
-
     private ListNeighbourActivity mActivity;
     private FavoriteNeighbourIdRepository favoriteNeighours;
+    private NeighbourApiService neighbourApiService;
     private List<Neighbour> neighboursList;
-
 
     @Rule
     public ActivityTestRule<ListNeighbourActivity> mActivityRule =
@@ -54,7 +54,8 @@ public class NeighboursFavoriteListTest {
         assertThat(mActivity, notNullValue());
 
         favoriteNeighours = FavoriteNeighbourIdRepository.getInstance();
-        neighboursList = DI.getNewInstanceApiService().getNeighbours();
+        neighbourApiService = DI.getNewInstanceApiService();
+        neighboursList = neighbourApiService.getNeighbours();
 
         // If not favorites neighbour, create 3 favorite neighbour
         if (favoriteNeighours.countNeighbour() == 0) {
@@ -80,9 +81,8 @@ public class NeighboursFavoriteListTest {
         ViewInteraction view = onView(withId(R.id.list_favorite_neighbours));
         for (int i = 0; i < favoriteNeighours.countNeighbour(); i++) {
             Long favoriteNeighbourId = favoriteNeighours.getIdList().get(i);
-            Neighbour favoriteNeighbour = favoriteNeighours.getNeighboursFromList(favoriteNeighbourId, neighboursList);
+            Neighbour favoriteNeighbour = neighbourApiService.getNeighbourWithId(favoriteNeighbourId);
             view.check(new RecyclerViewItemAssertion(i, R.id.item_list_name, withText(favoriteNeighbour.getName())));
         }
-
     }
 }
