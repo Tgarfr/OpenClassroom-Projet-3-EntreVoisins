@@ -72,7 +72,14 @@ public class DetailNeighbourActivity extends AppCompatActivity {
 
     @OnClick(R.id.add_favorite_neighbour)
     void addFavoriteNeighbour() {
-        favoriteNeighbourIdRepository.addIdNeighbour(neighbour.getId());
-        Toast.makeText(getApplicationContext(), "Ajout en favori", Toast.LENGTH_SHORT).show();
+        Long neighbourId = neighbour.getId();
+        if (!favoriteNeighbourIdRepository.getIdList().contains(neighbourId)) {
+            favoriteNeighbourIdRepository.addIdNeighbour(neighbourId);
+            Toast.makeText(getApplicationContext(), "Ajout dans les favoris", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            favoriteNeighbourIdRepository.deleteIdNeighbour(neighbourId);
+            Toast.makeText(getApplicationContext(), "Enlevé des favoris", Toast.LENGTH_SHORT).show();
+        }
     }
 }
