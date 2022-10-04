@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/detailNeighbourActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/avatarDetail"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/backButtonDetail"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="15dp"
+        android:src="@drawable/ic_back_button_24dp"
+        app:layout_constraintLeft_toLeftOf="@+id/avatarDetail"
+        app:layout_constraintTop_toTopOf="@id/avatarDetail" />
+
+    <TextView
+        android:id="@+id/nameTitreDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="30dp"
+        android:text="Titre"
+        android:textColor="@color/colorTitreDetail"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@id/avatarDetail" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/frame1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:layout_constraintTop_toBottomOf="@id/avatarDetail">
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/nameDetail"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:layout_columnSpan="2"
+                android:layout_margin="10dp"
+                android:text="Titre"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="482dp"
+                android:layout_height="1dp"
+                android:layout_row="1"
+                android:layout_column="0"
+                android:layout_columnSpan="2"
+                android:background="@color/colorSpaceLigne" />
+
+            <ImageView
+                android:id="@+id/icon_address"
+                android:layout_row="2"
+                android:layout_column="0"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_address_24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/addressDetail"
+                android:layout_row="2"
+                android:layout_column="1"
+                android:layout_margin="10dp"
+                android:text="Ville" />
+
+            <ImageView
+                android:id="@+id/icon_phoneNumber"
+                android:layout_row="3"
+                android:layout_column="0"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_phone_number_24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/phoneNumberDetail"
+                android:layout_row="3"
+                android:layout_column="1"
+                android:layout_margin="10dp"
+                android:text="Telephone" />
+
+            <ImageView
+                android:id="@+id/icon_aboutMe"
+                android:layout_row="4"
+                android:layout_column="0"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_address_24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/socialNetworkDetail"
+                android:layout_row="4"
+                android:layout_column="1"
+                android:layout_margin="10dp"
+                android:text="Réseaux sociaux" />
+
+        </GridLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/frame2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:layout_constraintTop_toBottomOf="@id/frame1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_row="0"
+                android:layout_columnSpan="2"
+                android:layout_margin="10dp"
+                android:layout_marginEnd="1dp"
+                android:text="A propos de moi"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorSpaceLigne" />
+
+            <TextView
+                android:id="@+id/aboutMeDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_row="0"
+                android:layout_columnSpan="2"
+                android:layout_margin="10dp"
+                android:text="Texte A propos de moi" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/add_favorite_neighbour"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        app:backgroundTint="@color/colorFondFavoriteButton"
+        app:layout_constraintRight_toRightOf="@id/frame1"
+        app:layout_constraintTop_toBottomOf="@id/nameTitreDetail"
+        app:srcCompat="@drawable/ic_favorite_add_24dp" />
+
+</android.support.constraint.ConstraintLayout>
