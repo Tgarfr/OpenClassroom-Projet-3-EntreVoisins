@@ -21,7 +21,7 @@ import butterknife.OnClick;
 public class DetailNeighbourActivity extends AppCompatActivity {
 
 
-    public static Neighbour neighbour;
+    private Neighbour neighbour;
     FavoriteNeighbourIdRepository favoriteNeighbourIdRepository;
 
     @BindView(R.id.avatarDetail)
@@ -46,6 +46,7 @@ public class DetailNeighbourActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_neighbour);
         ButterKnife.bind(this);
         favoriteNeighbourIdRepository = FavoriteNeighbourIdRepository.getInstance();
+        neighbour = (Neighbour) getIntent().getSerializableExtra("clickedNeighbour");
 
         Glide.with(this)
                 .load(neighbour.getAvatarUrl())
@@ -60,8 +61,8 @@ public class DetailNeighbourActivity extends AppCompatActivity {
     }
 
     public static void navigate(Activity activityContext, Neighbour clickedNeighbour) {
-        neighbour = clickedNeighbour;
         Intent intent = new Intent(activityContext, DetailNeighbourActivity.class);
+        intent.putExtra("clickedNeighbour", clickedNeighbour);
         ActivityCompat.startActivity(activityContext, intent, null);
     }
 
