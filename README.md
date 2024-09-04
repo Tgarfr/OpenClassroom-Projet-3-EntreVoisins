@@ -1,4 +1,4 @@
-Application Entrevoisins
+Entrevoisins, une application qui permet à des personnes d’un même quartier de se rendre des petits services : garde d’animaux, petit bricolage, troc d’objets, cours particuliers, de nombreuses options s’offrent aux utilisateurs !
 
 1. Pour compiler l’application
 - Clonez avec Git le code de l’application ou copier le répertoire sur votre ordinateur.
